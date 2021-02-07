@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos</title>
+</head>
+<body>
+
+  <button id="display-todos-button">Display Todos</button>
+  <button id="toggle-all-button">Toggle All</button>
+  <button id="add-button">Add</button>
+  <input id="add-input" >
+    <script>
+         // a list also known as array
+        var todos = [
+            {todoText: 'Item 1', completed: false},
+            {todoText: 'Item 2', completed: false},
+            {todoText: 'Item 3', completed: false}
+        ]
+        
+        displayTodos();
+
+        // adding new item to the list
+        function add() { 
+            var todo = addInput.value;     
+            todos.push({todoText: todo, completed: false});
+            addInput.value = "";
+            displayTodos();
+        }                                   
+        // updated items in the list
+        function edit (index, todoUpdated) {
+            todos[index].todoText = todoUpdated;
+            displayTodos();
+        }
+        // to deleted the first item
+        function remove (indexremoved) {
+            todos.splice(indexremoved, 1);
+            displayTodos();
+        }
+
+        //toggle button
+        function toggle(index) {
+           if(todos[index].completed === false){
+            todos[index].completed = true;
+           } else {
+            todos[index].completed = false;  
+           }
+           displayTodos();
+        }
+
+        // function for displaying todos
+        function displayTodos() {
+            for (var i = 0; i < todos.length; i++){
+                console.log(todos[i]);
+                }
+           }   
+        
+        //toggling all todos
+        function toggleAll() {
+
+            var completedTodos = 0
+
+            for (var i = 0; i < todos.length; i++) {
+                if (todos[i].completed === true){
+                    completedTodos++
+                }
+            }
+            if (completedTodos === todos.length) {
+                for (var i = 0; i < todos.length; i++){
+                    todos[i].completed = false;
+                }
+            } else {
+                for (var i=0; i < todos.length; i++){
+                    todos[i].completed = true;
+                }
+            }  
+            displayTodos();  
+        }
+          // display todos
+          var displayTodosButton = document.getElementById("display-todos-button");
+          displayTodosButton.addEventListener('click', displayTodos);
+          // toggle all button
+          var toggleAllButton = document.getElementById("toggle-all-button");
+          toggleAllButton.addEventListener('click', toggleAll);
+          // add button
+          var addButton = document.getElementById("add-button");
+          var addInput = document.getElementById("add-input");
+          addButton.addEventListener('click', add);
+    </script>
+</body>
+</html>
